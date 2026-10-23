@@ -27,16 +27,11 @@ export GEMINI_API_KEY="your-key"  # PowerShell: $env:GEMINI_API_KEY="your-key"
 streamlit run app.py
 ```
 
-## Deploy options
-**Streamlit Community Cloud** (easiest): push to GitHub, create the app, set Python 3.12 in
-Advanced settings, add `GEMINI_API_KEY` to Secrets. Its disk is NOT permanent: the store survives
-between sessions but is wiped on reboot/redeploy. Commit your files in `docs/` and they are
-re-indexed automatically after every restart.
 
 **Docker on a VM (truly persistent):**
 ```bash
 docker build -t company-kb .
-docker run -d -p 8501:8501 -e GEMINI_API_KEY="your-key" -v kb_data:/data company-kb
+docker run -d -p 8501:8501 -e GEMINI_API_KEY="key--" -v kb_data:/data company-kb
 ```
 The `kb_data` volume keeps the ChromaDB index across restarts and redeploys.
 Platforms with persistent disks (Render, Railway, Fly.io volumes) work the same way:
